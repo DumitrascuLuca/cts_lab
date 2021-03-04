@@ -1,5 +1,8 @@
 package ro.ase.sem2;
 
+import ro.ase.sem2.exceptii.IllegalTransferException;
+import ro.ase.sem2.exceptii.InsufficientFundsException;
+
 public class CurrentAccount extends BankAccount{
 	
 	//majuscule= acest atribut este static
@@ -26,16 +29,34 @@ public class CurrentAccount extends BankAccount{
 	}
 
 	@Override
-	public void Withdraw(double amount) {
-		// TODO Auto-generated method stub
+	public void Withdraw(double amount) throws InsufficientFundsException {
+		if(this.getBalance()>=amount)
+		{
+		this.setBalance(getBalance()-amount);
+		}
+		else
+		{
+
+			throw new InsufficientFundsException("Fonduri insuficiente");
+
+		}
 		
 	}
 
 	@Override
-	public void Transfer(double amount, Account destination) {
-		// TODO Auto-generated method stub
+	public void Transfer(double amount, Account destination) throws IllegalTransferException, InsufficientFundsException {
+	if(((BankAccount)destination).iban.equals(this.iban))
+	{
+		throw new IllegalTransferException("conturile coincid");
+	}
+	else
+	{
+		this.Withdraw(amount);
+		destination.Deposit(amount);
 		
 	}
+		
+}
 
 	
 	

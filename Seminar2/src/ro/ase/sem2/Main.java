@@ -10,6 +10,7 @@ public class Main {
 		CurrentAccount c=new CurrentAccount(300,"IBAN1");
 		CurrentAccount c1=new CurrentAccount(300,"IBAN2");
 		System.out.println("Suma disponibila este: "+c.getBalance());
+		SavingsAccount account3=new SavingsAccount(300,"IBAN3");
 		System.out.println("Credit maxim pentru un cont curent este: "+CurrentAccount.MAX_CREDIT);
 		c.Deposit(200);
 		System.out.println("Suma dupa adaugare: "+c.getBalance());
@@ -25,7 +26,11 @@ public class Main {
 		System.out.println("Suma cont 1: "+c.getBalance());
 		System.out.println("Suma cont 2: "+c1.getBalance());
 		
+		account3.addInterest(10);
+		System.out.println("suma in contul3 este: " + account3.getBalance());
 		
+		Bank banca = new Bank();
+		BankAccount account4=banca.openBankAccount(1);
 	}
 
 }

@@ -2,18 +2,41 @@ package ro.ase.sem2;
 
 import ro.ase.sem2.exceptii.IllegalTransferException;
 import ro.ase.sem2.exceptii.InsufficientFundsException;
+import ro.ase.sem2.interfata.Depositable;
+import ro.ase.sem2.interfata.NotificationSettings;
+import ro.ase.sem2.interfata.Transferable;
+import ro.ase.sem2.interfata.Withdrawable;
 
-public class CurrentAccount extends BankAccount{
+public class CurrentAccount extends BankAccount implements Depositable,Transferable,Withdrawable{
 	
 	//majuscule= acest atribut este static
 	//static=nu apartin unei instante ci apartin clasei in sine
 	public static double MAX_CREDIT=5000;
+	public NotificationSettings notificationService;
+	
 
 	//super se refera la instanta parintelui
 	public CurrentAccount() {
 		super();
 		
 	}
+
+	
+	
+	
+	public NotificationSettings getNotificationService() {
+		return notificationService;
+	}
+
+
+
+
+	public void setNotificationService(NotificationSettings notificationService) {
+		this.notificationService = notificationService;
+	}
+
+
+
 
 	//puteam sa avem un atribvut de sus maxcredit daca nu era static
 	//folosim this pentru alte variabile
@@ -22,13 +45,13 @@ public class CurrentAccount extends BankAccount{
 	}
 
 	//overload= mai multe functii cu nr de param diferit sau tipul pentru o metoda
-	@Override
+	
 	public void Deposit(double amount) {
 		this.setBalance(getBalance()+amount);
 		
 	}
 
-	@Override
+	
 	public void Withdraw(double amount) throws InsufficientFundsException {
 		if(this.getBalance()>=amount)
 		{
@@ -40,11 +63,14 @@ public class CurrentAccount extends BankAccount{
 			throw new InsufficientFundsException("Fonduri insuficiente");
 
 		}
-		
+		if(this.notificationService!=null)
+		{
+		this.notificationService.sendNotification("s-a extras suma de: "+amount+" lei");
+		}
 	}
 
-	@Override
-	public void Transfer(double amount, Account destination) throws IllegalTransferException, InsufficientFundsException {
+	
+	public void Transfer(double amount, Depositable destination) throws IllegalTransferException, InsufficientFundsException {
 	if(((BankAccount)destination).iban.equals(this.iban))
 	{
 		throw new IllegalTransferException("conturile coincid");
@@ -52,7 +78,7 @@ public class CurrentAccount extends BankAccount{
 	else
 	{
 		this.Withdraw(amount);
-		destination.Deposit(amount);
+		 destination.Deposit(amount);
 		
 	}
 		

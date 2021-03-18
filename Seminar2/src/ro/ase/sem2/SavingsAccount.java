@@ -14,13 +14,14 @@ public class SavingsAccount extends BankAccount implements Profitable{
 		super(balance, iban);
 	}
 
-	@Override
+	
 	public void Deposit(double amount) {
 		this.balance +=amount;
 		
+		
 	}
 
-	@Override
+	
 	public void Withdraw(double amount) throws InsufficientFundsException {
 		if(amount <= this.balance) {
 			this.balance -=amount;
@@ -28,7 +29,7 @@ public class SavingsAccount extends BankAccount implements Profitable{
 		
 	}
 
-	@Override
+	
 	public void Transfer(double amount, Account destination)
 			throws IllegalTransferException, InsufficientFundsException {
 		if(((BankAccount)destination).iban.equals(this.iban)){
@@ -36,7 +37,7 @@ public class SavingsAccount extends BankAccount implements Profitable{
 		}
 		else {
 			this.Withdraw(amount);
-			destination.Deposit(amount);
+			((SavingsAccount) destination).Deposit(amount);
 		}
 		
 	}

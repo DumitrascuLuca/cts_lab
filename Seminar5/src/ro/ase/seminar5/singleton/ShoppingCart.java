@@ -5,17 +5,19 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import ro.ase.seminar5.factory.Product;
+
 public class ShoppingCart  implements Serializable{
 	private  static ShoppingCart instance=null;
 	
 	private static Map<String,ShoppingCart> instances=null;
 	
 	public String type;
-	public ArrayList<String> listproduse;
+	public ArrayList<Product> listproduse;
 	
 	private ShoppingCart() {
 		instances=new HashMap<>();
-		listproduse=new ArrayList<String>();
+		listproduse=new ArrayList<Product>();
 		
 	}
 	public static synchronized ShoppingCart getInstance(String type) {
@@ -35,7 +37,7 @@ public class ShoppingCart  implements Serializable{
 	
 	
 	
-	public ArrayList<String> getProducts(){
+	public ArrayList<Product> getProducts(){
 		return listproduse;
 	}
 	

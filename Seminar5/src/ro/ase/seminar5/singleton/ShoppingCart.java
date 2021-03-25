@@ -1,4 +1,4 @@
-package ro.ase.seminar4;
+package ro.ase.seminar5.singleton;
 
 import java.io.Serializable;
 import java.util.ArrayList;

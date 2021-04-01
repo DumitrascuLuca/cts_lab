@@ -50,7 +50,18 @@ if(userPreference!=null) {
 //
 //ProductFactory productFactory = new ProductFactory();
 
-myProduct = productFactory.makeProduct();
+System.out.println(productFactory.getCalaog());
+userPreference=scan.nextLine();
+try
+{
+int id=Integer.valueOf(userPreference);
+myProduct = productFactory.makeProduct(id);
+}
+catch (NumberFormatException e) {
+	// TODO: handle exception
+	System.out.println("Scrie maestre un numar");
+}
+
 
 if(myProduct != null) {
 	myShoppingCart.listproduse.add(myProduct);

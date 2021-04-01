@@ -9,14 +9,15 @@ import java.net.URI;
 import java.net.URL;
 import java.util.ArrayList;
 
-import javax.smartcardio.ATR;
+
 
 public class TechProductFactory extends AbstractProductFactory{
 
 	@Override
-	public Product makeProduct() throws UnsupportedOperationException {
+	public Product makeProduct(int id) throws UnsupportedOperationException {
 		// TODO Auto-generated method stub
-		return new TechProduct("generic");
+		ArrayList<String> records=readRecord("tech_products.csv");
+		return new TechProduct.TechProductBuilder(id).getClass();
 	}
 
 	@Override

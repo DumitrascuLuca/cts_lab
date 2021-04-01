@@ -1,4 +1,4 @@
-package ro.ase.seminar5.factory;
+package ro.ase.seminar.builder;
 
 public abstract class AbstractProductFactory {
 

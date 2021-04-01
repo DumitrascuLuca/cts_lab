@@ -1,17 +1,16 @@
-package ro.ase.seminar5.main;
+package ro.ase.seminar.main;
 
 import java.util.Scanner;
 
-import ro.ase.seminar5.factory.AbstractProductFactory;
+import ro.ase.seminar.builder.AbstractProductFactory;
+import ro.ase.seminar.builder.Product;
+import ro.ase.seminar.builder.TechProductFactory;
+import ro.ase.seminar.singleton.ShoppingCart;
+
+
 
 //import com.sun.java_cup.internal.runtime.Scanner;
 
-import ro.ase.seminar5.factory.OfficeProduct;
-import ro.ase.seminar5.factory.Product;
-import ro.ase.seminar5.factory.ProductFactory;
-import ro.ase.seminar5.factory.TechProduct;
-import ro.ase.seminar5.factory.TechProductFactory;
-import ro.ase.seminar5.singleton.ShoppingCart;
 
 public class Main {
 

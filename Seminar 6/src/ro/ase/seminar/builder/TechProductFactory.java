@@ -1,5 +1,13 @@
 package ro.ase.seminar.builder;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.net.URL;
+import java.util.ArrayList;
+
 public class TechProductFactory extends AbstractProductFactory{
 
 	@Override
@@ -35,7 +43,7 @@ public class TechProductFactory extends AbstractProductFactory{
 		ArrayList<String> records=new ArrayList<String>();
 		System.out.println("Reading product records...");
 		try {
-			Thread.sleep(2);
+			Thread.sleep(2000);
 		} catch (InterruptedException e1) {
 			e1.printStackTrace();
 		}
@@ -58,9 +66,9 @@ public class TechProductFactory extends AbstractProductFactory{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		System.out.println("Finished reading product");
 		
 		return records;
 	}
-
 
 }

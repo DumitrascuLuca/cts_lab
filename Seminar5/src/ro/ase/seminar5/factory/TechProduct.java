@@ -2,86 +2,79 @@ package ro.ase.seminar5.factory;
 
 public class TechProduct implements Product{
 
-	
-	
+	int id;
 	String productName;
-	String manufacturer;
+	String manufactured;
 	String model;
 	String displayType;
 	float price;
-	 int id;
 	
+	private TechProduct() {
+	}
+	
+	public TechProduct(int id) {
+		super();
+		this.id = id;
+	}
+
+
+	public int getId() {
+		return id;
+	}
+
 	public String getProductName() {
 		return productName;
 	}
 
-
-	public String getManufacturer() {
-		return manufacturer;
+	public String getManufactured() {
+		return manufactured;
 	}
-
 
 	public String getModel() {
 		return model;
 	}
 
-
 	public String getDisplayType() {
 		return displayType;
 	}
-
 
 	public float getPrice() {
 		return price;
 	}
 
-
-	private TechProduct() {
-		// TODO Auto-generated constructor stub
-	}
-	
-
-	public TechProduct(int id)
-	{
-		super();
-		this.id=id;
-	}
 	@Override
 	public String getDescription() {
-		// TODO Auto-generated method stub
 		return "this is a tech product";
 	}
-	
 	
 	public static class TechProductBuilder{
 		private TechProduct product;
 		
-		public TechProductBuilder setName(String name)
-		{
+		public TechProductBuilder(int id) {
+			product=new TechProduct(id);
+			
+		}
+		public TechProductBuilder setName(String name) {
 			product.productName=name;
 			return this;
 		}
 		
-		public TechProductBuilder setManufacturer(String manufacturer)
-		{
-			product.manufacturer=manufacturer;
+		public TechProductBuilder setManufacturer(String manufacturer) {
+			product.manufactured=manufacturer;
 			return this;
 		}
 		
-		public TechProductBuilder setModel(String model)
-		{
+		public TechProductBuilder setModel(String model) {
 			product.model=model;
 			return this;
 		}
 		
-		public TechProductBuilder setType(String type)
-		{
-			product.displayType=type;
+		public TechProductBuilder setDisplayType(String displayType) {
+			product.displayType=displayType;
 			return this;
 		}
 		
-		public TechProductBuilder setprice(float price)
-		{
+		public TechProductBuilder setPrice(float price) {
 			product.price=price;
 			return this;
 		}
@@ -89,6 +82,16 @@ public class TechProduct implements Product{
 		public TechProduct getProduct() {
 			return product;
 		}
+		public void setProduct(TechProduct product) {
+			this.product = product;
+		}
+		
+	}
+
+	@Override
+	protected Object clone() throws CloneNotSupportedException {
+		TechProduct newProduct = new TechProductBuilder(id).setDisplayType(this.displayType).setManufacturer(this.manufactured).setModel(model).setName(name).getProduct()
+		return super.clone();
 	}
 
 }

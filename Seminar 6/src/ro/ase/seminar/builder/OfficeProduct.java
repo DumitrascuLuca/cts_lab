@@ -1,18 +1,14 @@
 package ro.ase.seminar.builder;
 
-public class OfficeProduct implements Product{
-
+public class OfficeProduct implements Product {
 	String productName;
 	
-	
-	
+	private OfficeProduct() {}
 	
 	public OfficeProduct(String productName) {
 		super();
 		this.productName = productName;
 	}
-
-
 
 
 	@Override

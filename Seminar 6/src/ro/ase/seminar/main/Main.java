@@ -1,70 +1,72 @@
-package ro.ase.seminar.main;
+package ro.ase.seminar.builder;
 
 import java.util.Scanner;
 
 import ro.ase.seminar.builder.AbstractProductFactory;
 import ro.ase.seminar.builder.Product;
+import ro.ase.seminar.builder.TechProduct;
 import ro.ase.seminar.builder.TechProductFactory;
 import ro.ase.seminar.singleton.ShoppingCart;
 
 
 
-//import com.sun.java_cup.internal.runtime.Scanner;
-
-
 public class Main {
 
 	public static void main(String[] args) {
+		ShoppingCart myShoppingCart = Cart.getInstance("shopping");
 
-		
-ShoppingCart myShoppingCart = ShoppingCart.getInstance("shopping");
+		Scanner scan = new Scanner(System.in);
+		System.out.println("Selectati categoria de produse:\n Produse tech \n Produse office");
+		String userPreferences = scan.nextLine();
+		Product myProduct = null;
 
-//Product smartphone = new TechProduct();
-//Product paperClip = new OfficeProduct();
-//myShoppingCart.products.add(smartphone);
-//myShoppingCart.products.add(paperClip);
+		AbstractProductFactory productFactory = null;
+		if (userPreferences != null) {
+			if (userPreferences.equalsIgnoreCase("tech")) {
+				productFactory = new TechProductFactory();
+			}
+		}
 
-Scanner scan = new Scanner(System.in);
-System.out.println("Selectati categoria de produse :\n tech - Produse tech \n office - Produse office");
-String userPreference=scan.nextLine();
+		System.out.println(productFactory.getCatalog());
+		userPreferences = scan.nextLine();
 
-Product myProduct = null;
+		for (int i = 0; i < 2; i++) {
+			userPreferences = scan.nextLine();
+			try {
+				int selectedId = Integer.valueOf(userPreferences);
+				if (myShoppingCart.products.isEmpty()) {
+					myProduct = productFactory.makeProduct(selectedId);
+				}
 
-AbstractProductFactory productFactory=null;
-if(userPreference!=null) {
-	if(userPreference.equalsIgnoreCase("tech")) {
-		productFactory=new TechProductFactory();
-	}
-}
+				for (Product p : myShoppingCart.products) {
+					if (p instanceof TechProduct) {
+						TechProduct tempProduct = (TechProduct) p;
 
-//if(userPreference.equalsIgnoreCase("tech")) {
-//	myProduct = new TechProduct();
-//}else if(userPreference.equalsIgnoreCase("office")) {
-//	myProduct = new OfficeProduct();
-//}
-//else {
-//	System.out.println("Optiune invalida");
-//	System.out.println("Catalog produse :\n tech - Produse tech \n office - Produse office");
-//}
-//
-//ProductFactory productFactory = new ProductFactory();
+						if (tempProduct.getId() == selectedId) {
+							try {
+								myProduct = (Product) tempProduct.clone();
+							} catch (CloneNotSupportedException e) {
+								e.printStackTrace();
+							}
+						} else {
+							myProduct = productFactory.makeProduct(selectedId);
+						}
+					}
+				}
+				myProduct = productFactory.makeProduct(selectedId);
+			} catch (NumberFormatException e) {
+				System.err.println("Selectie invalida");
 
-myProduct = productFactory.makeProduct();
+			}
 
-if(myProduct != null) {
-	myShoppingCart.listproduse.add(myProduct);
-}
-System.out.println("Reading product records...");
-try {
-	Thread.sleep(2);
-} catch (InterruptedException e1) {
-	e1.printStackTrace();
-}
-for(Product p:myShoppingCart.listproduse) {
-	System.out.println(p.getDescription());
-}
-		
-		
+			if (myProduct != null) {
+				myShoppingCart.products.add(myProduct);
+			}
+		}
+
+		for (Product p : myShoppingCart.products) {
+			System.out.println(p.getDescription());
+		}
 	}
 
 }

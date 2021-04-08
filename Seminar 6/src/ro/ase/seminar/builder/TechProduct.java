@@ -1,6 +1,6 @@
 package ro.ase.seminar.builder;
 
-public class TechProduct implements Product{
+public class TechProduct implements Product, Cloneable {
 
 	int id;
 	String productName;
@@ -8,15 +8,14 @@ public class TechProduct implements Product{
 	String model;
 	String displayType;
 	float price;
-	
+
 	private TechProduct() {
 	}
-	
+
 	public TechProduct(int id) {
 		super();
 		this.id = id;
 	}
-
 
 	public int getId() {
 		return id;
@@ -44,51 +43,54 @@ public class TechProduct implements Product{
 
 	@Override
 	public String getDescription() {
-		return "this is a tech product";
+		return this.productName + " " + this.manufactured + " " + this.model;
 	}
-	
-	public static class TechProductBuilder{
+
+	public static class TechProductBuilder {
 		private TechProduct product;
-		
+
 		public TechProductBuilder(int id) {
-			product=new TechProduct(id);
-			
+			product = new TechProduct(id);
+
 		}
+
 		public TechProductBuilder setName(String name) {
-			product.productName=name;
+			product.productName = name;
 			return this;
 		}
-		
+
 		public TechProductBuilder setManufacturer(String manufacturer) {
-			product.manufactured=manufacturer;
+			product.manufactured = manufacturer;
 			return this;
 		}
-		
+
 		public TechProductBuilder setModel(String model) {
-			product.model=model;
+			product.model = model;
 			return this;
 		}
-		
+
 		public TechProductBuilder setDisplayType(String displayType) {
-			product.displayType=displayType;
+			product.displayType = displayType;
 			return this;
 		}
-		
+
 		public TechProductBuilder setPrice(float price) {
-			product.price=price;
+			product.price = price;
 			return this;
 		}
-		
+
 		public TechProduct getProduct() {
 			return product;
 		}
-		
+
 	}
 
 	@Override
-	protected Object clone() throws CloneNotSupportedException {
-		TechProduct newProduct = new TechProductBuilder().
+	public Object clone() throws CloneNotSupportedException {
+		TechProduct newProduct = new TechProductBuilder(this.id).setDisplayType(this.displayType)
+				.setManufacturer(this.manufactured).setModel(this.model).setName(this.productName).setPrice(this.price)
+				.getProduct();
 		return super.clone();
 	}
-	
+
 }

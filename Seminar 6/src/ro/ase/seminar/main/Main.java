@@ -54,7 +54,12 @@ myProduct = productFactory.makeProduct();
 if(myProduct != null) {
 	myShoppingCart.listproduse.add(myProduct);
 }
-
+System.out.println("Reading product records...");
+try {
+	Thread.sleep(2);
+} catch (InterruptedException e1) {
+	e1.printStackTrace();
+}
 for(Product p:myShoppingCart.listproduse) {
 	System.out.println(p.getDescription());
 }

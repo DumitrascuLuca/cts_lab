@@ -3,15 +3,64 @@ package ro.ase.seminar.builder;
 public class TechProductFactory extends AbstractProductFactory{
 
 	@Override
-	public Product makeProduct() throws UnsupportedOperationException {
-		// TODO Auto-generated method stub
-		return new TechProduct("generic");
+	public Product makeProduct(int id) throws UnsupportedOperationException {
+		ArrayList<String> records = readRecordsFromFile("tech_products.csv");
+		for (String record : records) {
+			String[] productArrtributes = record.split(",");
+			if (Integer.valueOf(productArrtributes[0]) == id) {
+				TechProduct.TechProductBuilder productBuilder = new TechProduct.TechProductBuilder(id);
+				return productBuilder.setName(productArrtributes[1]).setManufacturer(productArrtributes[2])
+						.setModel(productArrtributes[3]).setPrice(Float.valueOf(productArrtributes[5])).getProduct();
+			}
+		}
+		return new TechProduct.TechProductBuilder(id).getProduct();
+
 	}
 
 	@Override
-	public String getCalaog() {
-		// TODO Auto-generated method stub
-		return "generic - Generic tech product";
+	public String getCatalog() {
+		ArrayList<String> records=readRecordsFromFile("tech_products.csv");
+		StringBuilder builder= new StringBuilder();
+		for(String record:records) {
+			String[] productArrtributes=record.split(",");
+			builder.append(productArrtributes[0]+ " - ");
+			builder.append(productArrtributes[1]+" - ")
+			.append(productArrtributes[2]+" ")
+			.append(productArrtributes[3]+"\n");
+		}
+		return builder.toString();
 	}
+	
+	private ArrayList<String> readRecordsFromFile(String fileName){
+		ArrayList<String> records=new ArrayList<String>();
+		System.out.println("Reading product records...");
+		try {
+			Thread.sleep(2);
+		} catch (InterruptedException e1) {
+			e1.printStackTrace();
+		}
+		
+		URL fileUrl=getClass().getResource(fileName);
+		File productsFile=new File("C:\\Users\\Laura\\Documents\\Facultate\\An 3 - Semestrul 2\\Calitate si Testare Software - CTS\\Seminar\\eclipse_workspace\\cts_lab\\seminar6\\src\\ro\\ase\\cts\\seminar6\\builder\\" + fileName);
+		try {
+			BufferedReader reader=new BufferedReader(new FileReader(productsFile));
+			String line;
+			try {
+				while((line=reader.readLine())!=null) {
+					records.add(line);
+				}
+				reader.close();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return records;
+	}
+
 
 }

@@ -1,6 +1,6 @@
 package ro.ase.seminar.adapter;
 
-public abstract class AmericanCar implements MovableImperial{
+public class AmericanCar implements MovableImperial{
 
 	private String model;
 	
@@ -10,9 +10,10 @@ public abstract class AmericanCar implements MovableImperial{
 		this.model = model;
 	}
 
-
-
-
-	
+	@Override
+	public int getMaxSpeed() {
+		//in imperial system
+		return 200;
+	}
 
 }

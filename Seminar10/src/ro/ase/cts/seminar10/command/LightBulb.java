@@ -22,6 +22,7 @@ public class LightBulb {
 		if(lightIntensity>0)
 		{
 		lightIntensity--;
+		System.out.println("Light is at " + lightIntensity + " intensity level ");
 		}
 	}
 	
@@ -29,5 +30,6 @@ public class LightBulb {
 	{
 		System.out.println("Light has been increased");
 		lightIntensity++;	
+		System.out.println("Light is at " + lightIntensity + " intensity level ");
 	}
 }

@@ -90,7 +90,7 @@ public class TechProduct implements Product{
 
 	@Override
 	protected Object clone() throws CloneNotSupportedException {
-		TechProduct newProduct = new TechProductBuilder(id).setDisplayType(this.displayType).setManufacturer(this.manufactured).setModel(model).setName(name).getProduct()
+		TechProduct newProduct = new TechProductBuilder(id).setDisplayType(this.displayType).setManufacturer(this.manufactured).setModel(model).setName(productName).getProduct()
 		return super.clone();
 	}
 

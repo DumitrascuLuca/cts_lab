@@ -1,4 +1,4 @@
-package ro.ase.cts.seminar13.UnitTesting;
+package ro.ase.cts.sem13.UnitTesting;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -9,8 +9,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
 
-import ro.ase.cts.seminar13.Student;
-import ro.ase.cts.seminar13.exceptions.StudentExceptionWrongValue;
+import ro.ase.cts.sem13.UnitTesting.Student;
+import ro.ase.cts.sem13.exceptions.StudentExceptionWrongValue;
 
 class StudentTestCase {
 

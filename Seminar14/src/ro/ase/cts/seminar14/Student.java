@@ -2,7 +2,7 @@ package ro.ase.cts.seminar14;
 
 import ro.ase.cts.seminar14.StudentExceptionWrongValue;
 
-public class Student {
+public class Student extends StudentAbstract{
 	
 	/* constraints
 	 * nume - [3-255] caractere
@@ -52,6 +52,7 @@ public class Student {
 		;
 	}
 	
+	@Override
 	public float calculMedie() throws StudentExceptionWrongValue{
 		if(note==null) {
 			throw new StudentExceptionWrongValue("empty dataset - note");

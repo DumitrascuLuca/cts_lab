@@ -42,4 +42,16 @@ public class Student {
 		this.note = note;
 	}
 	
+	public float calculMedie() throws StudentExceptionWrongValue{
+		if(note==null) {
+			throw new StudentExceptionWrongValue("empty dataset - note");
+		}
+		int suma=0;
+		for(int i=0;i<note.length;i++) {
+			suma+=note[i];
+		}
+		float medie=suma/(float)note.length;
+		return (int)(medie*100)/100.0f;
+	}
+	
 }
